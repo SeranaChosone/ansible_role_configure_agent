@@ -2,12 +2,12 @@
 # jenkins master
 master_username: admin
 master_password: admin
-master_host: "{{ ansible_host }}"
+master_host: "192.168.33.100"
 master_port: 8080
 master_url: "http://{{ master_host }}:{{ master_port }}"
 
 # general agent
-agent_function: generic
+agent_function: molecule
 agent_agent_name: "{{ agent_function }}-agent"
 agent_executors_num: 1
 
