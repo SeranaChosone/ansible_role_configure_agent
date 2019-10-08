@@ -5,7 +5,7 @@
     state: present
 
 - name: Install Docker
-  include_tasks: install_docker.yml
+  include_tasks: /agent_flavours/ansible/install_docker.yml
   when: ansible_agent_install_docker
 
 - name: Install pip
