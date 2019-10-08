@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  # Roles assumes default vars from role.
+  vars:
+    connect_agent_to_master: false
+    configure_ansible: true
+    configure_packer: true
+    ansible_agent_install_molecule: true
+    ansible_agent_install_docker: false
+  roles:
+    - role: vivid-role-linux-jenkins-agent-configure

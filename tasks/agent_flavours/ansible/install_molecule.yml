@@ -1,0 +1,14 @@
+---
+- name: Install molecule pre-reqs
+  package:
+    name: "{{ ansible_agent_requirements }}"
+    state: present
+
+- name: Install Docker
+  include_tasks: install_docker.yml
+  when: ansible_agent_install_docker
+
+- name: Install pip
+  easy_install:
+    name: pip
+    state: present

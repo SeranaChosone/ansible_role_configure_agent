@@ -1,0 +1,45 @@
+---
+- name: "Create jenkins usergroup"
+  group:
+    name: "{{ agent_linux_jenkins_username }}"
+    state: present
+  become: true
+
+- name: "Create jenkins user with root privileges"
+  user:
+    name: "{{ agent_linux_jenkins_username }}"
+    group: "{{ agent_linux_jenkins_username }}"
+    password: "{{ agent_linux_jenkins_password }}"
+    update_password: always
+    state: present
+    append: true
+    home: "{{ agent_linux_home }}"
+    createhome: true
+  become: true
+
+- name: "Set authorized key"
+  authorized_key:
+    user: "{{ agent_linux_jenkins_username }}"
+    state: present
+    key: "{{ agent_linux_jenkins_public_key }}"
+  become: true
+  when: agent_linux_jenkins_public_key | trim
+
+- name: "Create agent home directory"
+  file:
+    path: "{{ agent_linux_home }}"
+    state: directory
+    owner: "{{ agent_linux_jenkins_username }}"
+    group: "{{ agent_linux_user_group }}"
+    mode: 0776
+  become: true
+
+- name: "Install agent jenkins"
+  jenkins_script:
+    user: "{{ master_username }}"
+    password: "{{ master_password }}"
+    validate_certs: false
+    timeout: 120
+    url: "{{ master_url }}"
+    script: "{{ lookup('template', 'add_linux_agent.groovy.j2') }}"
+  when: connect_agent_to_master

@@ -1,0 +1,14 @@
+---
+- name: Install Python
+  package:
+    name: python
+    state: present
+
+- name: Install Ansible
+  package:
+    name: ansible
+    state: present
+
+- name: Install Molecule
+  include_tasks: install_molecule.yml
+  when: ansible_agent_install_molecule

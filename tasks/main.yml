@@ -1,0 +1,15 @@
+---
+- name: Load requirements
+  include_vars: main.yml
+
+- name: Install Requirements
+  package:
+    name: "{{ agent_requirements }}"
+    state: present
+
+- name: Include Linux Jenkins Agent Config
+  include_tasks: base_agent.yml
+
+- name: Configure Ansible Agent
+  include_tasks: agent_flavours/ansible/main.yml
+  when: configure_ansible

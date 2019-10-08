@@ -1,0 +1,25 @@
+---
+agent_requirements:
+  - "git"
+  - "net-tools"
+  - "wget"
+  - "lsof"
+  - "unzip"
+  - "java"
+
+ansible_agent_requirements:
+  - "epel-release"
+  - "gcc"
+  - "python-devel"
+  - "openssl-devel"
+  - "libselinux-python"
+  - "python-setuptools"
+  - "python2-virtualenv"
+
+vagrant_agent_requirements:
+  - "qemu-kvm"
+  - "libvirt"
+  - "libvirt-python"
+  - "libguestfs-tools"
+  - "virt-install"
+  - "python2-virtualenv"

@@ -1,0 +1,21 @@
+---
+- name: "Create Docker Group"
+  group:
+    name: docker
+    state: present
+
+- name: "Add user to Docker Group"
+  user:
+    name: "{{ agent_linux_jenkins_username }}"
+    groups: "docker,wheel"
+
+- name: "Installing Docker latest version"
+  package:
+    name: docker
+    state: present
+
+- name: "Starting and Enabling Docker service"
+  service:
+    name: docker
+    state: started
+    enabled: true
