@@ -26,7 +26,7 @@ agent_linux_labels:
 agent_linux_selinux_ports: "{{ master_port }},49187,\
 {{ agent_linux_ssh_port }}"
 
-connect_agent_to_master: true
+connect_agent_to_master: false
 
 configure_ansible: true
 
